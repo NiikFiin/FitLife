@@ -15,7 +15,7 @@ def greeting():
             break
         except ValueError:
             print('Ошибка :( Введите возраст')
-    user_name=user_name.title()
+    user_name = user_name.title()
     print(f'Приятно познакомиться, {user_name}, давай продолжим')
     return user_name, user_age
 
@@ -36,14 +36,12 @@ def get_weight_height():
 
 def calculate_bmi(user_weight, user_height):
     """Расчитывает и возвращает ИМТ"""
-    return round((user_weight / (user_height ** 2)),1)
+    return round((user_weight / (user_height ** 2)), 1)
 
 
 def give_rec_about_water(user_weight):
     """Расчитывает и возвращает норму воды в сутки"""
-    water_ml = user_weight * WATER_PER_KG
-    water_l = water_ml / ML_IN_L
-    return water_l
+    return user_weight * WATER_PER_KG / ML_IN_L
 
 
 def final_report(user_name, user_age, bmi, water_l):
@@ -56,7 +54,7 @@ def final_report(user_name, user_age, bmi, water_l):
     time.sleep(1)
     print('=' * 60)
     line_1 = (
-        f'Отчет для пользователя: {user_name.title()} '
+        f'Отчет для пользователя: {user_name} '
         f'(возраст: {user_age})'
     )
     line_2 = f'Твой индекс массы тела: {bmi:.1f}'
@@ -64,7 +62,7 @@ def final_report(user_name, user_age, bmi, water_l):
     print(f'|{line_1:^58}|')
     print(f'|{line_2:^58}|')
     print(f'|{line_3:^58}|')
-    print(f'|{'Будь здоров!':^58}|')
+    print(f'|{"Будь здоров!":^58}|')
     print('=' * 60)
 
 
