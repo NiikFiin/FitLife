@@ -13,9 +13,10 @@ def greeting():
         try:
             user_age = int(input('Сколько тебе лет? '))
             break
-        except Exception:
+        except ValueError:
             print('Ошибка :( Введите возраст')
-    print(f'Приятно познакомиться, {user_name.title()}, давай продолжим')
+    user_name=user_name.title()
+    print(f'Приятно познакомиться, {user_name}, давай продолжим')
     return user_name, user_age
 
 
@@ -28,16 +29,14 @@ def get_weight_height():
                 'Введи свой рост в м (например, 1.78): '
             ))
             break
-        except Exception:
+        except ValueError:
             print('Ошибка :( Введите вес в кг и рост в м')
     return user_weight, user_height
 
 
 def calculate_bmi(user_weight, user_height):
     """Расчитывает и возвращает ИМТ"""
-    bmi = user_weight / (user_height ** 2)
-    bmi = round(bmi, 1)
-    return bmi
+    return round((user_weight / (user_height ** 2)),1)
 
 
 def give_rec_about_water(user_weight):
