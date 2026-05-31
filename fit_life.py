@@ -1,26 +1,76 @@
-# Проект FitLife - MVP версия 1.0
+import time
 
 
-# 1. Знакомство
-# TODO: Спроси у пользователя имя и сохрани в переменную user_name
-# TODO: Спроси возраст и сохрани в переменную user_age (не забудь преобразовать в число)
+WATER_PER_KG = 30  # константа для расчета нормы воды
+ML_IN_L = 1000       # константа для перевода из мл в л
 
 
-# 2. Сбор данных
-# TODO: Запроси вес (в кг) и сохрани в user_weight (тип float)
-# TODO: Запроси рост (в метрах, например 1.75) и сохрани в user_height (тип float)
+def greeting():
+    """Приветствует и получает имя и возраст пользователя"""
+    print('Привет, друг) Добро пожаловать в мир спорта! Давай познакомимся!')
+    user_name = input('Как тебя зовут? ')
+    while True:        # цикл для исключения ошибки
+        try:
+            user_age = int(input('Сколько тебе лет? '))
+            break
+        except Exception:
+            print('Ошибка :( Введите возраст')
+    print(f'Приятно познакомиться, {user_name.title()}, давай продолжим')
+    return user_name, user_age
 
 
-# 3. Логика расчетов (Функции как "черный ящик": используем арифметику)
-# Формула ИМТ: вес разделить на (рост в квадрате)
-# TODO: Рассчитай bmi (Индекс массы тела)
+def get_weight_height():
+    """Возвращает рост и вес пользователя"""
+    while True:
+        try:
+            user_weight = float(input('Введи свой вес в кг (например, 65): '))
+            user_height = float(input(
+                'Введи свой рост в м (например, 1.78): '
+            ))
+            break
+        except Exception:
+            print('Ошибка :( Введите вес в кг и рост в м')
+    return user_weight, user_height
 
 
-# Подсчет воды: вес * 30 мл
-# TODO: Рассчитай water_needed
+def calculate_bmi(user_weight, user_height):
+    """Расчитывает и возвращает ИМТ"""
+    bmi = user_weight / (user_height ** 2)
+    bmi = round(bmi, 1)
+    return bmi
 
 
-# 4. Вывод красивого результата
-# TODO: Используй f-строку, чтобы вывести приветствие, например: "Привет, Иван!"
-# TODO: Выведи возраст, ИМТ (округленный до 1 знака) и норму воды.
-print("Расчет окончен. Будьте здоровы!")
+def give_rec_about_water(user_weight):
+    """Расчитывает и возвращает норму воды в сутки"""
+    water_ml = user_weight * WATER_PER_KG
+    water_l = water_ml / ML_IN_L
+    return water_l
+
+
+def final_report(user_name, user_age, bmi, water_l):
+    """Вывод главного отчета"""
+    print('Формируем отчет', end='')
+    for _ in range(3):
+        print('>', end='', flush=True)
+        time.sleep(0.2)
+    print('Отчет готов!\n')
+    time.sleep(1)
+    print('=' * 60)
+    line_1 = (
+        f'Отчет для пользователя: {user_name.title()} '
+        f'(возраст: {user_age})'
+    )
+    line_2 = f'Твой индекс массы тела: {bmi:.1f}'
+    line_3 = f'Рекомендуемая норма воды в день: {water_l:.1f}л в день'
+    print(f'|{line_1:^58}|')
+    print(f'|{line_2:^58}|')
+    print(f'|{line_3:^58}|')
+    print(f'|{'Будь здоровы!':^58}|')
+    print('=' * 60)
+
+
+user_name, user_age = greeting()
+user_weight, user_height = get_weight_height()
+bmi = calculate_bmi(user_weight, user_height)
+water_l = give_rec_about_water(user_weight)
+final_report(user_name, user_age, bmi, water_l)
