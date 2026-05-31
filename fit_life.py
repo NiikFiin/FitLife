@@ -65,7 +65,7 @@ def final_report(user_name, user_age, bmi, water_l):
     print(f'|{line_1:^58}|')
     print(f'|{line_2:^58}|')
     print(f'|{line_3:^58}|')
-    print(f'|{'Будь здоровы!':^58}|')
+    print(f'|{'Будь здоров!':^58}|')
     print('=' * 60)
 
 
