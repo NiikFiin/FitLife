@@ -1,10 +1,8 @@
-import time
-
 WATER_PER_KG = 30  # константа для расчета нормы воды
 ML_IN_L = 1000       # константа для перевода из мл в л
 
 
-def greeting():
+def print_greeting():
     """Приветствует и получает имя и возраст пользователя"""
     print('Привет, друг) Добро пожаловать в мир спорта! Давай познакомимся!')
     user_name = input('Как тебя зовут? ')
@@ -43,14 +41,12 @@ def give_rec_about_water(user_weight):
     return user_weight * WATER_PER_KG / ML_IN_L
 
 
-def final_report(user_name, user_age, bmi, water_l):
+def print_final_report(user_name, user_age, bmi, water_l):
     """Вывод главного отчета"""
     print('Формируем отчет', end='')
     for _ in range(3):
         print('>', end='', flush=True)
-        time.sleep(0.2)
     print('Отчет готов!\n')
-    time.sleep(1)
     print('=' * 60)
     line_1 = (
         f'Отчет для пользователя: {user_name} '
@@ -65,8 +61,9 @@ def final_report(user_name, user_age, bmi, water_l):
     print('=' * 60)
 
 
-user_name, user_age = greeting()
-user_weight, user_height = get_weight_height()
-bmi = calculate_bmi(user_weight, user_height)
-water_l = give_rec_about_water(user_weight)
-final_report(user_name, user_age, bmi, water_l)
+if __name__ == "__main__":
+    user_name, user_age = print_greeting()
+    user_weight, user_height = get_weight_height()
+    bmi = calculate_bmi(user_weight, user_height)
+    water_l = give_rec_about_water(user_weight)
+    print_final_report(user_name, user_age, bmi, water_l)
